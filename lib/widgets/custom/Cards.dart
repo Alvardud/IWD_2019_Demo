@@ -36,7 +36,7 @@ class Cards extends StatelessWidget {
                 fontWeight: FontWeight.w300
             ),),
             Padding(padding: EdgeInsets.symmetric(vertical: 4.0),),
-            CardElement(promociones: promociones,imagen: direccion),
+            CardElement(promociones: promociones,imagen: direccion,titulo: titulo,),
           ],
         ),
       );
@@ -44,8 +44,8 @@ class Cards extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              Colors.pinkAccent,
-              Colors.pink[100]
+              Colors.purpleAccent,
+              Colors.purple[100]
             ]),
             borderRadius: BorderRadius.circular(8.0)
         ),
@@ -70,8 +70,9 @@ class CardElement extends StatelessWidget {
 
   final String imagen;
   final bool promociones;
+  final String titulo;
 
-  CardElement({this.promociones,this.imagen});
+  CardElement({this.promociones,this.imagen,this.titulo});
 
   @override
   Widget build(BuildContext context) {
@@ -81,28 +82,42 @@ class CardElement extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              ContenedorElemento(imagen: imagen,),
+              ContenedorElemento(imagen: imagen,titulo: titulo,),
               Container(height: 20.0,)
             ],
           ),
           Positioned(
-            left: 150.0,
+            right: 8.0,
             top: 113.0,
             child: promocion(),
           )
         ],
       );
     }else{
-      return ContenedorElemento(imagen:imagen);
+      return ContenedorElemento(imagen:imagen,titulo: titulo,);
     }
   }
 }
 
-class ContenedorElemento extends StatelessWidget {
+class ContenedorElemento extends StatefulWidget {
 
   final String imagen;
+  final String titulo;
 
-  ContenedorElemento({this.imagen});
+  ContenedorElemento({this.imagen,this.titulo});
+  
+  @override
+  _ContenedorElementoState createState() => _ContenedorElementoState(imagen: imagen,titulo: titulo);
+}
+
+class _ContenedorElementoState extends State<ContenedorElemento> {
+
+  final String imagen;
+  final Color accent=Colors.purpleAccent;
+  IconData _icono=Icons.favorite_border;
+  final String titulo;
+
+  _ContenedorElementoState({this.imagen,this.titulo});
 
   Widget Contenido(){
     return Container(
@@ -111,14 +126,20 @@ class ContenedorElemento extends StatelessWidget {
           Column(
             children: <Widget>[
               Container(
+                padding: EdgeInsets.all(8.0),
+                height: 35.0,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft:Radius.circular(7.0),
                         topRight: Radius.circular(7.0)
                     ),
-                    color: Color(0xFFFF80AB).withOpacity(0.7)
+                    color: Colors.black38.withOpacity(0.7)
                 ),
-                height: 35.0,
+                child: Text(titulo,style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0
+                ),),
               )
             ],
           ),
@@ -131,20 +152,21 @@ class ContenedorElemento extends StatelessWidget {
                 height: 50.0,
                 decoration: BoxDecoration(
                     border: Border(
-                        top: BorderSide(color: Colors.pinkAccent),
-                        bottom:BorderSide(color: Colors.pinkAccent),
-                        right: BorderSide(color: Colors.pinkAccent),
-                        left: BorderSide(color: Colors.pinkAccent)
+                        top: BorderSide(color: accent),
+                        bottom:BorderSide(color: accent),
+                        right: BorderSide(color: accent),
+                        left: BorderSide(color: accent)
                     ),
-                    color: Colors.white,
+                    color: Colors.grey[50],
                     borderRadius: BorderRadius.circular(75.0)
                 ),
                 child: Center(
-                  child: Icon(Icons.favorite_border,color: Colors.pinkAccent,size: 30.0,),
+                  child: Icon(_icono,color: accent,size: 25.0,),
                 ),
               ),
               onTap: (){
                 //TODO: cambiar el accionar del boton
+
               },
             ),
           )
@@ -162,24 +184,29 @@ class ContenedorElemento extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
-            left: BorderSide(color: Colors.pinkAccent),
-            bottom: BorderSide(color: Colors.pinkAccent),
-            right: BorderSide(color: Colors.pinkAccent),
-            top: BorderSide(color: Colors.pinkAccent)
+            left: BorderSide(color: accent),
+            bottom: BorderSide(color: accent),
+            right: BorderSide(color: accent),
+            top: BorderSide(color: accent)
           ),
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Contenido(),
       );
     }else{
-      return Container(
-        height: 144,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(imagen)),
-            borderRadius: BorderRadius.circular(8.0)
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Container(
+          height: 144,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(imagen)),
+              borderRadius: BorderRadius.circular(8.0)
+          ),
+          child: Contenido(),
         ),
-        child: Contenido(),
       );
     }
   }

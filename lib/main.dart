@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:app_mujeres_aurora/screens/Home.dart';
 import'package:flutter/services.dart';
+import 'package:app_mujeres_aurora/screens/Favourite.dart';
+import 'package:app_mujeres_aurora/screens/Search.dart';
 
 void main(){
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.pink[300]));
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.purple[300]));
   runApp(MyApp());
 }
 
@@ -28,6 +30,9 @@ class _CuerpoState extends State<Cuerpo> with SingleTickerProviderStateMixin {
 
   TabController _tabController;
   int _index;
+  final Color accent=Colors.purpleAccent;
+  final Color primario=Colors.purple[300];
+
 
   @override
   void initState() {
@@ -42,24 +47,24 @@ class _CuerpoState extends State<Cuerpo> with SingleTickerProviderStateMixin {
       bottomNavigationBar: BottomNavyBar(
           items: [
             BottomNavyBarItem(
-              icon: Icon(Icons.home,color: Colors.pinkAccent,),
+              icon: Icon(Icons.home,color: accent,),
               title: Text('Home',style: TextStyle(color:Colors.white)),
-              activeColor: Colors.pink[300],
+              activeColor: primario,
             ),
             BottomNavyBarItem(
-                icon: Icon(Icons.search,color: Colors.pinkAccent,),
+                icon: Icon(Icons.search,color: accent,),
                 title: Text('Search',style: TextStyle(color:Colors.white)),
-                activeColor: Colors.pink[300],
+                activeColor: primario,
             ),
             BottomNavyBarItem(
-                icon: Icon(Icons.favorite,color: Colors.pinkAccent,),
+                icon: Icon(Icons.favorite,color: accent,),
                 title: Text('Favourite',style: TextStyle(color:Colors.white),),
-                activeColor: Colors.pink[300],
+                activeColor: primario,
             ),
             BottomNavyBarItem(
-                icon: Icon(Icons.star,color: Colors.pinkAccent,),
+                icon: Icon(Icons.star,color: accent,),
                 title: Text('Sugerencias',style: TextStyle(color:Colors.white)),
-                activeColor: Colors.pink[300],
+                activeColor: primario,
             ),
           ],
           onItemSelected: (index) => setState(() {
@@ -72,8 +77,8 @@ class _CuerpoState extends State<Cuerpo> with SingleTickerProviderStateMixin {
           controller: _tabController,
           children: <Widget>[
             Home(),
-            Container(),
-            Container(),
+            Search(),
+            Favourite(),
             Container(),
           ],
         ),

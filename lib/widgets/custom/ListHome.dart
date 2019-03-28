@@ -3,10 +3,10 @@ import 'package:app_mujeres_aurora/widgets/custom/Cards.dart';
 
 class ListHome extends StatelessWidget{
 
-  int fecha;
-  String dia='Lunes';
+  final int fecha;
+  final String dia;
 
-  ListHome({this.fecha});
+  ListHome({this.fecha,this.dia});
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +48,33 @@ class Lista extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       height: MediaQuery.of(context).size.height-301,
       child: ListView(
-        //physics: ScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         children: <Widget>[
           Cards(image: false,promociones: false,),
-          Cards(hora: '15:30',image: true,promociones: false,),
-          Cards(hora: '17:30',image: true,promociones: false,),
-          Cards(hora: '18:00',image: true,promociones: true,),
-          Cards(hora: '21:00',image: true,promociones: false,),
+          Cards(
+            hora: '15:30',
+            image: true,
+            promociones: false,
+            titulo: 'No limits',
+            direccion: 'assets/gimnasio.jpeg',),
+          Cards(
+            hora: '16:30',
+            image: true,
+            promociones: false,
+            titulo: 'La vie en Rose SPA',
+            direccion: 'assets/spa.jpeg',),
+          Cards(
+            hora: '18:00',
+            image: true,
+            promociones: true,
+            titulo: 'Salon de Belleza Exotica',
+            direccion: 'assets/maquillaje.png',),
+          Cards(
+            hora: '21:00',
+            image: true,
+            promociones: false,
+            titulo: 'Chalet La Suisse',
+            direccion: 'assets/restaurant.jpeg',),
         ],
       ),
     );

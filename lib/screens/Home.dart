@@ -11,10 +11,10 @@ class Home extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: <Widget>[
-          Titulo(titulo: 'Mi Agenda'),
+          Titulo(titulo: 'Mi Agenda',avatar:true),
           TotalPago(color:Colors.white),
           Expanded(child:CardsContainer()),
-          punteroFecha(color:Colors.white),
+          punteroFecha(color:Colors.transparent),
         ],
       ),
     );
@@ -139,7 +139,7 @@ class _punteroFechaState extends State<punteroFecha> {
         children: <Widget>[
               Row(
                 children: <Widget>[
-                  Icon(Icons.arrow_back_ios,size: 20.0,),
+                  Icon(Icons.arrow_back_ios,size: 20.0,color: Colors.black54),
                   Padding(padding: EdgeInsets.symmetric(horizontal: 2.0),),
                   Text(diaAnterior+", "+fechaAnterior.toString())
             ],
@@ -147,10 +147,9 @@ class _punteroFechaState extends State<punteroFecha> {
           Expanded(child: Container(),),
               Row(
                 children: <Widget>[
-
               Text(diaPosterior+", "+fechaPosterior.toString()),
               Padding(padding: EdgeInsets.symmetric(horizontal: 2.0),),
-              Icon(Icons.arrow_forward_ios,size: 20.0,),
+              Icon(Icons.arrow_forward_ios,size: 20.0,color: Colors.black54,),
             ],
           )
         ],

@@ -136,12 +136,32 @@ class _CardFlipperState extends State<CardFlipper> with TickerProviderStateMixin
 
   Widget _buildCard(int cardIndex, int cardCount, double scrollPercent){
     final cardScrollPercent = scrollPercent / (1/cardCount);
+    final fecha = DateTime.now();
+    final int dia = fecha.day;
+    final int numeroSemana=fecha.weekday;
+    String _diaSemana;
+
+    if(numeroSemana == 1){
+      _diaSemana='Lunes';
+    }else if (numeroSemana == 2){
+      _diaSemana = 'Martes';
+    }else if(numeroSemana == 3){
+      _diaSemana = 'Miercoles';
+    }else if(numeroSemana == 4){
+      _diaSemana = 'Jueves';
+    }else if(numeroSemana == 5){
+      _diaSemana = 'Viernes';
+    }else if(numeroSemana == 6){
+      _diaSemana = 'Sabado';
+    }else{
+      _diaSemana = 'Domingo';
+    }
 
     return FractionalTranslation(
       translation: Offset(cardIndex-cardScrollPercent, 0.0),
       child: Transform(
         transform: _buildCardProjection(cardScrollPercent-cardIndex),
-        child: ListHome(fecha: 25,),
+        child: ListHome(fecha: dia,dia:_diaSemana),
       ),
     );
   }
